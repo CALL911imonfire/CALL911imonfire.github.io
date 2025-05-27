@@ -62,7 +62,6 @@
       background: rgba(0, 0, 0, 0.9);
       justify-content: center;
       align-items: center;
-      flex-direction: column;
     }
 
     .modal.show {
@@ -73,28 +72,34 @@
       max-width: 90%;
       max-height: 80vh;
       border-radius: 10px;
-      margin-bottom: 20px;
+      z-index: 1;
     }
 
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .controls button {
-      background: #333;
-      color: #fff;
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 1em;
+      padding: 12px 16px;
+      font-size: 1.5em;
       cursor: pointer;
+      border-radius: 5px;
+      z-index: 1000;
       transition: background 0.2s ease;
     }
 
-    .controls button:hover {
-      background: #555;
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-btn.prev {
+      left: 30px;
+    }
+
+    .nav-btn.next {
+      right: 30px;
     }
   </style>
 </head>
@@ -114,11 +119,9 @@
 
   <!-- Modal Container -->
   <div class="modal" id="modal">
+    <button class="nav-btn prev" id="prevBtn">&#10094;</button>
     <img id="modal-img" src="" alt="Enlarged image">
-    <div class="controls">
-      <button id="prevBtn">← Prev</button>
-      <button id="nextBtn">Next →</button>
-    </div>
+    <button class="nav-btn next" id="nextBtn">&#10095;</button>
   </div>
 
   <script>
@@ -165,5 +168,6 @@
 
 </body>
 </html>
+
 
 
