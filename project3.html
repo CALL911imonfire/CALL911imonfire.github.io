@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookie Store – Dozen on the Avenue</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.02);
+    }
+
+    a.back {
+      display: block;
+      text-align: center;
+      margin: 40px auto;
+      font-size: 1em;
+      text-decoration: none;
+      color: #bbbbbb;
+      transition: color 0.2s ease;
+    }
+
+    a.back:hover {
+      color: #ffffff;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+      z-index: 1;
+    }
+
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      font-size: 1.5em;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 1000;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-btn.prev {
+      left: 30px;
+    }
+
+    .nav-btn.next {
+      right: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cookie Store – Dozen on the Avenue</h1>
+
+  <div class="gallery">
+    <img src="https://raw.githubusercontent.com/CALL911imonfire/CALL911imonfire.github.io/refs/heads/main/Club%20Sushi/Club%20Sushi%20logo.jpg" alt="Poster 1">
+    <img src="https://raw.githubusercontent.com/CALL911imonfire/CALL911imonfire.github.io/refs/heads/main/Club%20Sushi/Club%20Sushi%20logo%202.jpg" alt="More 1">
+    <img src="https://raw.githubusercontent.com/CALL911imonfire/CALL911imonfire.github.io/refs/heads/main/Club%20Sushi/Club%20Sushi%20logo%203.jpg" alt="More 2">
+    <img src="https://raw.githubusercontent.com/CALL911imonfire/CALL911imonfire.github.io/refs/heads/main/Club%20Sushi/Club%20Sushi%20Menus.jpg" alt="More 3">
+  </div>
+
+  <a class="back" href="index.html">← Back to Portfolio</a>
+
+  <!-- Modal Container -->
+  <div class="modal" id="modal">
+    <button class="nav-btn prev" id="prevBtn">&#10094;</button>
+    <img id="modal-img" src="" alt="Enlarged image">
+    <button class="nav-btn next" id="nextBtn">&#10095;</button>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const images = Array.from(document.querySelectorAll('.gallery img'));
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      modalImg.src = images[index].src;
+      currentIndex = index;
+      modal.classList.add('show');
+    }
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => showImage(index));
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      modalImg.src = images[currentIndex].src;
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      modalImg.src = images[currentIndex].src;
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal || e.target === modalImg) {
+        modal.classList.remove('show');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('show')) return;
+      if (e.key === "Escape") modal.classList.remove('show');
+      if (e.key === "ArrowRight") nextBtn.click();
+      if (e.key === "ArrowLeft") prevBtn.click();
+    });
+  </script>
+
+</body>
+</html>
