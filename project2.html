@@ -83,32 +83,33 @@
       border-radius: 10px;
     }
 
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      font-size: 1.5em;
-      cursor: pointer;
-      border-radius: 5px;
-      z-index: 1000;
-      transition: background 0.2s ease;
-    }
+  .nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    font-size: 1.5em;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 1000;
+    transition: background 0.2s ease;
+  }
+  
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .nav-btn.prev {
+    left: 30px;
+  }
+  
+  .nav-btn.next {
+    right: 30px;
+  }
 
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .nav-btn.prev {
-      left: 20px;
-    }
-
-    .nav-btn.next {
-      right: 20px;
-    }
   </style>
 </head>
 <body>
@@ -129,12 +130,11 @@
 
   <!-- Modal Container -->
   <div class="modal" id="modal">
-    <div class="modal-content">
-      <button class="nav-btn prev" id="prevBtn">&#10094;</button>
-      <img id="modal-img" src="" alt="Enlarged image">
-      <button class="nav-btn next" id="nextBtn">&#10095;</button>
-    </div>
+    <button class="nav-btn prev" id="prevBtn">&#10094;</button>
+    <img id="modal-img" src="" alt="Enlarged image">
+    <button class="nav-btn next" id="nextBtn">&#10095;</button>
   </div>
+
 
   <script>
     const modal = document.getElementById('modal');
